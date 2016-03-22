@@ -76,13 +76,6 @@ var common = {
 
 if (TARGET === 'dev' || !TARGET) {
   module.exports = merge(common, {
-    devServer: {
-      historyApiFallback: true,
-      contentBase: './'
-    },
-    // output: {
-    //   publicPath: '/assets'
-    // },
     plugins: [
       new NpmInstallPlugin({
         save: true // --save
