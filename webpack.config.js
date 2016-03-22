@@ -20,6 +20,7 @@ var common = {
     extensions: ['', '.js', '.jsx']
   },
   output: {
+    path: __dirname,
     filename: 'scripts/[name].bundle.js',
     sourceMapFilename: '[file].map'
   },
@@ -29,6 +30,11 @@ var common = {
       test: /\.js[x]?$/,
       loaders: ['babel'],
       exclude: /(node_modules|bower_components)/
+    },
+    {
+      test: /\.js$/, 
+      loader: "eslint-loader", 
+      exclude: /node_modules/
     }, 
     {
       test: /\.html$/,
@@ -51,6 +57,13 @@ var common = {
       loader: "file-loader"
     }]
   },
+  eslint:{
+    configFile: './.eslintrc'
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './'
+  },
   plugins: [
     new ExtractTextPlugin("css/[name].css", {allChunks: true})
   ],
@@ -64,11 +77,12 @@ var common = {
 if (TARGET === 'dev' || !TARGET) {
   module.exports = merge(common, {
     devServer: {
-      historyApiFallback: true
+      historyApiFallback: true,
+      contentBase: './'
     },
-    output: {
-      publicPath: '/assets'
-    },
+    // output: {
+    //   publicPath: '/assets'
+    // },
     plugins: [
       new NpmInstallPlugin({
         save: true // --save

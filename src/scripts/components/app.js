@@ -1,9 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class App extends Component {
+class App extends Component {
+  static propTypes = {
+    children: PropTypes.object.isRequired
+  }
+  componentWillMount() {
+    console.log('just for now');
+  }
   render() {
-    return(
-      <div>Welcome. Let's get started with redux.</div>
-    )
+    return (
+      <div>{this.props.children}</div>
+    );
   }
 }
+
+export default App;
